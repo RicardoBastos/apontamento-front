@@ -48,6 +48,5 @@ const Empresa: React.FC = () => {
     </>
   );
 };
-// ricardo bastos
 
 export default Empresa;

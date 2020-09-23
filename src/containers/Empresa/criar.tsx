@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+
 import { useStoreState, useStoreActions } from 'store/hooks';
 import Formulario from 'components/Empresa/formulario';
 
@@ -29,6 +30,5 @@ const Criar: React.FC = () => {
     </>
   );
 };
-// ricardo bastosddddddddd
 
 export default Criar;
