@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import Login from 'containers/Login';
 import Projeto from 'containers/Projeto';
 import Ponto from 'containers/Ponto';
 import {
@@ -8,19 +9,16 @@ import {
   EmpresaListar,
   EmpresaEditar,
 } from '../containers/Empresa';
-
-const BemVindo: React.FC = () => {
-  return <div>BemVindo</div>;
-};
+import PrivateRoute from './Route';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route exact path="/" component={BemVindo} />
-    <Route path="/empresa" exact component={EmpresaListar} />
-    <Route path="/empresa/criar" component={EmpresaCriar} />
-    <Route path="/empresa/:id/editar" component={EmpresaEditar} />
-    <Route path="/projeto" component={Projeto} />
-    <Route path="/ponto" component={Ponto} />
+    <Route exact path="/" component={Login} />
+    <PrivateRoute path="/empresa" exact component={EmpresaListar} />
+    <PrivateRoute path="/empresa/criar" component={EmpresaCriar} />
+    <PrivateRoute path="/empresa/:id/editar" component={EmpresaEditar} />
+    <PrivateRoute path="/projeto" component={Projeto} />
+    <PrivateRoute path="/ponto" component={Ponto} />
   </Switch>
 );
 

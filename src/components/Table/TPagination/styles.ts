@@ -42,13 +42,13 @@ export const Pagination = styled.div`
     }
 
     :hover {
-      background-color: #2d3035;
+      border: 1px solid #222;
     }
   }
 
   button:disabled,
   button[disabled] {
-    background-color: #2a2d32;
-    color: #a5a7ab;
+    background: #2d3035;
+    border: none;
   }
 `;

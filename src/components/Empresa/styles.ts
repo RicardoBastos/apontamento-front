@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const ContainerFilter = styled.div`
-  padding: 15px 0;
+  padding: 15px 5px;
   display: flex;
   justify-content: flex-end;
   background: #2d3035;

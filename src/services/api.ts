@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { notification } from 'components/Notification';
 import { apiConfig } from './api-config';
+import { getToken } from './auth';
 
 const api = axios.create(apiConfig);
 
@@ -9,8 +10,12 @@ api.interceptors.request.use((param: AxiosRequestConfig) => ({
   ...param,
 }));
 
-api.interceptors.response.use((response: AxiosResponse) => {
-  return response;
+api.interceptors.request.use((config: AxiosRequestConfig) => {
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 api.interceptors.response.use(
@@ -27,7 +32,7 @@ api.interceptors.response.use(
       const error = new Error(response.statusText);
       throw error;
     }
-    return response;
+    return response.data;
   },
   (error: any) => {
     // handle the response error

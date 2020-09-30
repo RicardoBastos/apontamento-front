@@ -14,5 +14,5 @@ export const Container = styled.div`
 export const Title = styled.div`
   color: #a5a7ab;
   font-size: 1.2rem;
-  font-weight: 400;
+  font-weight: bold;
 `;

@@ -47,8 +47,8 @@ export interface IEmpresaModel {
 const listarEmpresasDebounce = debounce(
   async (actions, param: IFilterEmpresa) => {
     actions.showLoader();
-    const { data } = await apiListarEmpresas(param);
-    actions.alterarListaEmpresa(data);
+    const listEmpresa = await apiListarEmpresas(param);
+    actions.alterarListaEmpresa(listEmpresa);
     actions.limparFormulario();
     actions.hideLoader();
   },
@@ -106,8 +106,8 @@ const empresa: IEmpresaModel = {
   }),
   buscarPorId: thunk(async (actions, payload) => {
     actions.showLoader();
-    const { data } = await apiBuscarEmpresaPorId(payload);
-    actions.alterarBuscaPorId(data);
+    const usuario = await apiBuscarEmpresaPorId(payload);
+    actions.alterarBuscaPorId(usuario);
     actions.hideLoader();
   }),
   atualizarEmpresa: thunk(async (_, payload) => {

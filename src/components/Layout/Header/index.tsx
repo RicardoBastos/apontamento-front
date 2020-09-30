@@ -1,14 +1,12 @@
 import React, { useCallback } from 'react';
 import { useStoreState, useStoreActions } from 'store/hooks';
-import {
-  MdViewHeadline,
-  MdClose,
-  MdAccountCircle,
-  MdNotifications,
-} from 'react-icons/md';
+import { MdViewHeadline, MdClose, MdAccountCircle } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 import { Container, Perfil } from './styles';
+import { logout } from '../../../services/auth';
 
 const Header: React.FC = () => {
+  const history = useHistory();
   const abrirMenu = useStoreState((state) => {
     return state.header.abrirMenu;
   });
@@ -19,6 +17,11 @@ const Header: React.FC = () => {
   const fncOpenClose = useCallback(() => {
     setAbrirMenu(!abrirMenu);
   }, [setAbrirMenu, abrirMenu]);
+
+  const signOut = () => {
+    logout();
+    history.push('/');
+  };
 
   return (
     <Container>
@@ -35,8 +38,9 @@ const Header: React.FC = () => {
         <span>APONTAMENTO</span>
       </div>
       <Perfil>
-        <MdNotifications size="24" />
-        <MdAccountCircle size="24" />
+        <button type="button" onClick={signOut}>
+          <MdAccountCircle size="24" />
+        </button>
       </Perfil>
     </Container>
   );

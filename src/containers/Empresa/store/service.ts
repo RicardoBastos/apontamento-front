@@ -3,29 +3,30 @@ import { IList } from 'components/Table';
 import { AxiosResponse } from 'axios';
 import { IFilterEmpresa, IFormulario } from './model';
 
-const empresas = '/empresas/';
+const empresa = 'empresas';
 
-export function apiListarEmpresas(
+export async function apiListarEmpresas(
   params: IFilterEmpresa,
-): Promise<AxiosResponse<IList>> {
-  return api.get<IList>(empresas, { params });
+): Promise<IList> {
+  const { data, totalRecords } = (await api.get(`${empresa}/listar`, {
+    params,
+  })) as IList;
+
+  return { data, totalRecords };
 }
 
-export function apiBuscarEmpresaPorId(
-  id: string,
-): Promise<AxiosResponse<IFormulario>> {
-  return api.get<IFormulario>(empresas + id);
+export async function apiBuscarEmpresaPorId(id: string): Promise<IFormulario> {
+  const data = (await api.get(`${empresa}/buscar/${id}`)) as IFormulario;
+  return data;
 }
 
 export function apiAtualizarEmpresa(
   id: string,
   params: IFormulario,
-): Promise<AxiosResponse<any>> {
-  return api.put(empresas + id, params);
+): Promise<AxiosResponse> {
+  return api.put(`${empresa}/atualizar/${id}`, params);
 }
 
-export function apiSalvarEmpresa(
-  params: IFormulario,
-): Promise<AxiosResponse<any>> {
-  return api.post(empresas, params);
+export function apiSalvarEmpresa(params: IFormulario): Promise<AxiosResponse> {
+  return api.post(`${empresa}/salvar`, params);
 }
