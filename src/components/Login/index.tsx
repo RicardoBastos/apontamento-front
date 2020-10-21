@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Container as ContainerGrid, Row, Column } from 'components/Grid';
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -9,29 +9,35 @@ import { IFormulario } from '../../containers/Login/store/model';
 import { Container, ContainerCenter, Empresa, Form } from './styles';
 
 interface IFormularioLogin {
-  onChange(e: React.ChangeEvent<HTMLInputElement>): void;
   formulario: IFormulario;
-  onSubmitLogin(): void;
+  onSubmitLogin(data: IFormulario): void;
   loading?: boolean;
 }
 
-const Index: React.FC<IFormularioLogin> = ({
-  formulario,
-  onSubmitLogin,
-  onChange,
-}) => {
-  const criarSchema = Yup.object().shape({
-    email: Yup.string()
-      .required('campo obrigatório')
-      .max(60, 'tamanho máximo 60 caracteres'),
-    senha: Yup.string()
-      .required('campo obrigatório')
-      .max(60, 'tamanho máximo 60 caracteres'),
+const Index: React.FC<IFormularioLogin> = ({ formulario, onSubmitLogin }) => {
+  const criarSchema = useMemo(
+    () =>
+      Yup.object().shape({
+        email: Yup.string()
+          .required('campo obrigatório')
+          .max(60, 'tamanho máximo 60 caracteres')
+          .email('e-mail inválido'),
+        senha: Yup.string()
+          .required('campo obrigatório')
+          .max(60, 'tamanho máximo 60 caracteres'),
+      }),
+    [],
+  );
+
+  const { register, handleSubmit, errors, reset } = useForm<IFormulario>({
+    resolver: yupResolver(criarSchema),
+    defaultValues: { email: formulario?.email, senha: formulario?.senha },
   });
 
-  const { register, handleSubmit, errors } = useForm<IFormulario>({
-    resolver: yupResolver(criarSchema),
-  });
+  const onSubmit = async (data: IFormulario) => {
+    await onSubmitLogin(data);
+    reset();
+  };
 
   return (
     <Container>
@@ -56,7 +62,7 @@ const Index: React.FC<IFormularioLogin> = ({
       <ContainerCenter>
         <Empresa>APONTAMENTO</Empresa>
         <Form>
-          <form onSubmit={handleSubmit(onSubmitLogin)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <ContainerGrid>
               <Row style={{ paddingBottom: '20px' }}>
                 <Column
@@ -71,8 +77,6 @@ const Index: React.FC<IFormularioLogin> = ({
                     label="Email"
                     required
                     register={register}
-                    value={formulario.email}
-                    onChange={onChange}
                     errors={errors.email}
                   />
                 </Column>
@@ -82,9 +86,8 @@ const Index: React.FC<IFormularioLogin> = ({
                     name="senha"
                     label="Senha"
                     required
+                    type="password"
                     register={register}
-                    value={formulario.senha}
-                    onChange={onChange}
                     errors={errors.senha}
                   />
                 </Column>

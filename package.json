@@ -30,6 +30,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-notifications-component": "^2.4.0",
     "@types/react-router-dom": "^5.1.5",
+    "@types/react-select": "^3.0.22",
     "@types/styled-components": "^5.1.2",
     "@types/yup": "^0.29.4",
     "axios": "^0.19.2",
@@ -44,6 +45,7 @@
     "react-notifications-component": "^2.4.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-select": "^3.1.0",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
     "yup": "^0.29.3"
@@ -51,8 +53,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "npm run cypress:open",
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open",
+    "cypres:run": "cypress run"
   },
   "browserslist": {
     "production": [
@@ -71,6 +75,8 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "4.0.1",
     "@typescript-eslint/parser": "4.0.1",
+    "cypress": "^5.3.0",
+    "cypress-react-unit-test": "^4.15.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",

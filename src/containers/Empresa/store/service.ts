@@ -16,7 +16,7 @@ export async function apiListarEmpresas(
 }
 
 export async function apiBuscarEmpresaPorId(id: string): Promise<IFormulario> {
-  const data = (await api.get(`${empresa}/buscar/${id}`)) as IFormulario;
+  const { data } = await api.get(`${empresa}/buscar/${id}`);
   return data;
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'components/Select';
+import Select from 'components/SelectInput';
 import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
@@ -54,18 +54,16 @@ const TablePagination: React.FC<ITablePaginationProps> = ({
     <Container>
       <ComboPagina>
         <Select
-          name="status"
-          label="Status"
-          noLabel
-          value={pagination.size}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+          search={pagination.size}
+          options={[
+            { id: 10, name: '10' },
+            { id: 20, name: '20' },
+            { id: 30, name: '30' },
+          ]}
+          handleChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
             handleRowsPerPage(e)
           }
-          options={[
-            { value: '10', label: '10' },
-            { value: '20', label: '20' },
-            { value: '30', label: '30' },
-          ]}
+          bottom
         />
       </ComboPagina>
       <Total>

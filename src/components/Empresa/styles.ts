@@ -1,13 +1,8 @@
 import styled from 'styled-components/macro';
 
 export const ContainerFilter = styled.div`
-  padding: 15px 5px;
-  display: flex;
-  justify-content: flex-end;
+  padding-top: 10px;
   background: #2d3035;
-  div {
-    width: 300px;
-  }
 `;
 
 export const ContainerForm = styled.div`

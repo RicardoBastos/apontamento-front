@@ -13,7 +13,7 @@ export const Container = styled.div`
 `;
 
 export const ComboPagina = styled.div`
-  width: 200px;
+  /* width: 200px; */
 `;
 
 export const Total = styled.div``;

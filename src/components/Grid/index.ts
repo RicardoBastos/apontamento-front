@@ -20,7 +20,7 @@ export const Row = styled.div`
   height: auto;
   float: left;
   box-sizing: border-box;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   &:before,
   &after {
     content: '';

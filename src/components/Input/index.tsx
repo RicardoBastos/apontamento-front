@@ -15,6 +15,7 @@ const Input: React.FC<InputProps> = ({
   errors,
   register,
   required,
+  value,
   ...rest
 }) => {
   return (
@@ -23,7 +24,13 @@ const Input: React.FC<InputProps> = ({
         {label}
         {required ? '*' : ''}
       </label>
-      <input ref={register} type="text" name={name} {...rest} />
+      <input
+        ref={register}
+        type="text"
+        name={name}
+        defaultValue={value}
+        {...rest}
+      />
       {errors && <MessageError>{errors.message}</MessageError>}
     </Container>
   );

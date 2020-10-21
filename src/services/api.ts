@@ -35,11 +35,10 @@ api.interceptors.response.use(
     return response.data;
   },
   (error: any) => {
-    // handle the response error
     if (error.response !== undefined) {
       if (error.response.status === 400) {
-        if (error.response.data.errors.length) {
-          error.response.data.errors.forEach((nome: string) => {
+        if (error.response.data.Errors.length) {
+          error.response.data.Errors.forEach((nome: string) => {
             notification({ type: 'info', title: 'Apontamento', message: nome });
           });
         }

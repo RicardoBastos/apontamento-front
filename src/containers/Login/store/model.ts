@@ -42,6 +42,7 @@ const session: ISessionModel = {
   }),
   autenticar: thunk(async (actions, payload) => {
     actions.showLoader();
+    actions.alterarSession(payload);
     const usuario = await apiAutenticar(payload);
     if (usuario.token) {
       login(usuario.token);

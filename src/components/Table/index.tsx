@@ -64,11 +64,11 @@ const Table: React.FC<ITableProps> = ({
     [alterarPaginacao, pagination],
   );
 
-  const handleRowsPerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleRowsPerPage = (e: any) => {
     const paginationNovo = {
       ...pagination,
       page: 0,
-      size: parseInt(e.target.value, 10),
+      size: parseInt(e.id, 10),
     };
     alterarPaginacao(paginationNovo);
   };

@@ -1,9 +1,13 @@
 import React, { useCallback } from 'react';
 import Input from 'components/Input/index';
-import Select from 'components/Select';
+// import Select from 'components/Select';
 import { StateMapper, ActionMapper } from 'easy-peasy';
 import { IEmpresaFilter } from 'containers/Empresa/store/model';
 import { IPagination } from 'components/Table';
+// import Select from 'react-select';
+import { Container, Row, Column } from 'components/Grid';
+import Select from 'components/SelectInput';
+
 import { ContainerFilter } from './styles';
 
 interface IEmpresaFiltroProps {
@@ -16,11 +20,7 @@ const FilterEmpresa: React.FC<IEmpresaFiltroProps> = ({ state, actions }) => {
   const { alterarPaginacao, alterarFiltro } = actions;
 
   const handleChange = useCallback(
-    (
-      e:
-        | React.ChangeEvent<HTMLInputElement>
-        | React.ChangeEvent<HTMLSelectElement>,
-    ) => {
+    (e: any, n?: string) => {
       const paginationNovo: IPagination = {
         page: 0,
         size: 10,
@@ -29,37 +29,46 @@ const FilterEmpresa: React.FC<IEmpresaFiltroProps> = ({ state, actions }) => {
       };
       alterarPaginacao(paginationNovo);
 
+      const el = n || e.target.name;
+      const vl = n ? e.id : e.target.value;
       const filtroNovo: IEmpresaFilter = {
         ...filtro,
-        [e.target.name]: e.target.value,
+        [el]: vl,
       };
       alterarFiltro(filtroNovo);
     },
     [alterarFiltro, alterarPaginacao, filtro],
   );
+
+  const options = [
+    { id: -1, name: 'Todos' },
+    { id: 1, name: 'Ativos' },
+    { id: 0, name: 'Inativos' },
+  ];
+
   return (
     <ContainerFilter>
-      <div>
-        <Input
-          name="nome"
-          placeholder="Pesquisar por nome"
-          value={filtro.nome}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <Select
-          name="status"
-          noLabel
-          value={filtro.status}
-          onChange={handleChange}
-          options={[
-            { value: -1, label: 'Todos' },
-            { value: 1, label: 'Ativos' },
-            { value: 0, label: 'Inativos' },
-          ]}
-        />
-      </div>
+      <Container>
+        <Row>
+          <Column mobile={12} tablet={12} desktop={4}>
+            <Input
+              name="nome"
+              placeholder="Pesquisar por nome"
+              value={filtro.nome}
+              onChange={handleChange}
+            />
+          </Column>
+
+          <Column mobile={12} tablet={12} desktop={2}>
+            <Select
+              search={filtro.status}
+              options={options}
+              handleChange={handleChange}
+              bottom={false}
+            />
+          </Column>
+        </Row>
+      </Container>
     </ContainerFilter>
   );
 };

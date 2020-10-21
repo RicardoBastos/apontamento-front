@@ -1,4 +1,4 @@
-import { createStore } from 'easy-peasy';
+import { createStore, Store } from 'easy-peasy';
 
 import header, { IHeaderModel } from 'containers/Layout/Header/model';
 import menu, { IMenuModel } from 'containers/Layout/Menu/model';
@@ -21,6 +21,6 @@ export const storeModel: IStoreModel = {
 
 const store = createStore(storeModel);
 
-export const getStore = (): any => store;
+export const getStore = (): Store => store;
 
 export default store;
