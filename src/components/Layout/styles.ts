@@ -11,6 +11,7 @@ export const Main = styled.main`
   width: 100%;
   display: flex;
   margin-top: 70px;
+  background: #22252a;
 `;
 
 export const Content = styled.div`

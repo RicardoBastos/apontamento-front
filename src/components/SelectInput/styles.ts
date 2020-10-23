@@ -37,7 +37,6 @@ export const ContainerSelect = styled.div<ContainerSelectProps>`
 `;
 
 export const ContainerInput = styled.div`
-  width: 100%;
   outline: none;
   border: 0;
   border: 1px solid #444951;

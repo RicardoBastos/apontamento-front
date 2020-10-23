@@ -8,19 +8,29 @@ export const Container = styled.div`
   align-items: center;
   color: var(--color-white);
   background: var(--color-cinza);
-  padding: 0 15px;
-  height: 60px;
+  padding: 5px 15px;
+  height: auto;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
 export const ComboPagina = styled.div`
   /* width: 200px; */
+  @media (max-width: 800px) {
+    margin: 5px 0;
+  }
 `;
 
-export const Total = styled.div``;
+export const Total = styled.div`
+  @media (max-width: 800px) {
+    margin: 5px 0;
+  }
+`;
 
 export const Pagination = styled.div`
   display: flex;
-
   button {
     border-radius: 50%;
     width: 40px;
@@ -50,5 +60,9 @@ export const Pagination = styled.div`
   button[disabled] {
     background: #2d3035;
     border: none;
+  }
+
+  @media (max-width: 800px) {
+    margin: 5px 0;
   }
 `;

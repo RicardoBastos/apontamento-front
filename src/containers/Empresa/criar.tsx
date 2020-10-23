@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react';
 
 import { useStoreState, useStoreActions } from 'store/hooks';
 import Formulario from 'components/Empresa/formulario';
+import { IFormulario } from 'containers/Empresa/store/model';
 
 const Criar: React.FC = () => {
   const { formulario, loading } = useStoreState((state) => state.empresa);
@@ -15,8 +16,8 @@ const Criar: React.FC = () => {
     alterarEmpresa(novo);
   }
 
-  function handleSubmit() {
-    salvarEmpresa(formulario);
+  async function handleSubmit(data: IFormulario) {
+    salvarEmpresa(data);
   }
 
   return (

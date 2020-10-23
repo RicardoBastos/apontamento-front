@@ -5,7 +5,7 @@ export const MessageError = styled.div`
 `;
 
 export const Container = styled.div`
-  padding: 0 5px;
+  /* padding: 0 5px; */
   width: 100%;
 
   label {

@@ -14,7 +14,7 @@ import { ContainerForm } from './styles';
 interface IFormularioEmpresa {
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
   formulario: IFormulario;
-  onSubmitEmpresa(): void;
+  onSubmitEmpresa(data: IFormulario): void;
   loading?: boolean;
 }
 
@@ -29,9 +29,14 @@ const Formulario: React.FC<IFormularioEmpresa> = ({
       .max(60, 'tamanho máximo 60 caracteres'),
   });
 
-  const { register, handleSubmit, errors } = useForm<IFormulario>({
+  const { register, handleSubmit, errors, reset } = useForm<IFormulario>({
     resolver: yupResolver(criarSchema),
   });
+
+  const onSubmit = async (data: IFormulario) => {
+    await onSubmitEmpresa(data);
+    reset();
+  };
 
   return (
     <ContainerForm>
@@ -39,7 +44,7 @@ const Formulario: React.FC<IFormularioEmpresa> = ({
         <LinkButton text="voltar" type="primary" link="/empresa" />
       </Title>
 
-      <form onSubmit={handleSubmit(onSubmitEmpresa)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Container>
           <Row>
             <Column mobile={12} tablet={12} desktop={4}>
