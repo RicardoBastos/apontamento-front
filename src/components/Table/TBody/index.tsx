@@ -23,41 +23,44 @@ const TableBody: React.FC<ITableBodyProps> = ({
   function renderCell(tipo: string | undefined, valueData: any) {
     switch (tipo) {
       case 'data':
-        return loading ? (
-          <div>carregando</div>
-        ) : (
-          format(new Date(valueData), 'dd/MM/yyyy')
-        );
-
+        return format(new Date(valueData), 'dd/MM/yyyy');
       case 'boolean':
         return valueData ? <MdDone /> : <MdClose />;
       default:
-        return loading ? <div>carregando</div> : valueData;
+        return valueData;
     }
   }
 
   return (
     <tbody>
-      {data.map((row) => (
-        <tr key={row.id}>
-          {columns.map((col) => {
-            return (
-              <td key={col.key} style={{ width: col.tamanho }}>
-                {renderCell(col.tipo, row[col.key])}
-              </td>
-            );
-          })}
-          {isEdit && (
-            <td style={{ width: '10%', textAlign: 'center' }}>
-              <Link to={`${resource}/${row.id}/editar`}>
-                <span>
-                  <MdModeEdit />
-                </span>
-              </Link>
-            </td>
-          )}
+      {loading ? (
+        <tr>
+          <td>Carregando...</td>
         </tr>
-      ))}
+      ) : (
+        data.map((row) => {
+          return (
+            <tr key={row.id}>
+              {columns.map((col) => {
+                return (
+                  <td key={col.key} style={{ width: col.tamanho }}>
+                    {renderCell(col.tipo, row[col.key])}
+                  </td>
+                );
+              })}
+              {isEdit && (
+                <td style={{ width: '10%', textAlign: 'center' }}>
+                  <Link to={`${resource}/${row.id}/editar`}>
+                    <span>
+                      <MdModeEdit />
+                    </span>
+                  </Link>
+                </td>
+              )}
+            </tr>
+          );
+        })
+      )}
     </tbody>
   );
 };

@@ -1,16 +1,25 @@
 import React from 'react';
 import { ButtonPrimary, ButtonSecondary, ButtonDefault } from './styles';
 
-interface ButtonProps {
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   text: string;
-  type?: 'primary' | 'secondary' | 'submit';
+  typeButton?: 'primary' | 'secondary' | 'submit';
   onClick?(): void;
-}
+};
 
-const Button: React.FC<ButtonProps> = ({ text, type, onClick }) => {
-  switch (type) {
+const Button: React.FC<ButtonProps> = ({
+  text,
+  typeButton,
+  onClick,
+  ...rest
+}) => {
+  switch (typeButton) {
     case 'primary':
-      return <ButtonPrimary onClick={onClick}>{text}</ButtonPrimary>;
+      return (
+        <ButtonPrimary onClick={onClick} {...rest}>
+          {text}
+        </ButtonPrimary>
+      );
     case 'secondary':
       return <ButtonSecondary>{text}</ButtonSecondary>;
     case 'submit':

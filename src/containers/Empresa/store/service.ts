@@ -2,6 +2,7 @@ import { api } from 'services/api';
 import { IList } from 'components/Table';
 import { AxiosResponse } from 'axios';
 import { IFilterEmpresa, IFormulario } from './model';
+import history from '../../../services/history';
 
 const empresa = 'empresas';
 
@@ -24,6 +25,7 @@ export function apiAtualizarEmpresa(
   id: string,
   params: IFormulario,
 ): Promise<AxiosResponse> {
+  history.push('/empresa');
   return api.put(`${empresa}/atualizar/${id}`, params);
 }
 

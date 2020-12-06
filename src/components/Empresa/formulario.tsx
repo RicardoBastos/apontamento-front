@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Title from 'components/Title';
 import LinkButton from 'components/LinkButton';
 import Input from 'components/Input';
@@ -22,6 +22,7 @@ const Formulario: React.FC<IFormularioEmpresa> = ({
   onChange,
   formulario,
   onSubmitEmpresa,
+  loading,
 }) => {
   const criarSchema = Yup.object().shape({
     nome: Yup.string()
@@ -38,10 +39,14 @@ const Formulario: React.FC<IFormularioEmpresa> = ({
     reset();
   };
 
+  const buttonName = useMemo(() => {
+    return formulario.id ? 'Atualizar' : 'Salvar';
+  }, [formulario.id]);
+
   return (
     <ContainerForm>
-      <Title title="NOVO">
-        <LinkButton text="voltar" type="primary" link="/empresa" />
+      <Title title={formulario.id ? 'EDITAR' : 'NOVO'}>
+        <LinkButton text="voltar" typeButton="primary" link="/empresa" />
       </Title>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -57,6 +62,7 @@ const Formulario: React.FC<IFormularioEmpresa> = ({
                 value={formulario.nome}
                 onChange={onChange}
                 errors={errors.nome}
+                disabled={loading}
               />
             </Column>
             <Column mobile={12} tablet={12} desktop={3}>
@@ -66,12 +72,17 @@ const Formulario: React.FC<IFormularioEmpresa> = ({
                 register={register}
                 label="Ativo"
                 onChange={onChange}
+                disabled={loading}
               />
             </Column>
           </Row>
           <Row>
             <Column mobile={12} tablet={12} desktop={12} direction="flex-end">
-              <Button type="submit" text="Salvar" />
+              <Button
+                type="submit"
+                text={loading ? 'Aguarde...' : buttonName}
+                disabled={loading}
+              />
             </Column>
           </Row>
         </Container>

@@ -33,7 +33,7 @@ const Empresa: React.FC = () => {
   return (
     <>
       <Title title="EMPRESA">
-        <LinkButton text="Novo" type="primary" link="/empresa/criar" />
+        <LinkButton text="Novo" typeButton="primary" link="/empresa/criar" />
       </Title>
 
       <FilterEmpresa state={state} actions={actions} />

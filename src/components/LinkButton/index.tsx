@@ -4,15 +4,15 @@ import Button from '../Button';
 
 interface ILinkButtonProps {
   text: string;
-  type?: 'primary' | 'secondary';
+  typeButton?: 'primary' | 'secondary';
   onClick?(): void;
   link: string;
 }
 
-const LinkButton: React.FC<ILinkButtonProps> = ({ text, type, link }) => {
+const LinkButton: React.FC<ILinkButtonProps> = ({ text, typeButton, link }) => {
   return (
     <Link to={link}>
-      <Button text={text} type={type} />
+      <Button text={text} typeButton={typeButton} />
     </Link>
   );
 };

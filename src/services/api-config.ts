@@ -3,7 +3,6 @@ import { PathLike } from 'fs';
 
 export const apiConfig = {
   returnRejectedPromiseOnError: true,
-  // withCredentials: true,
   timeout: 30000,
   baseURL: process.env.REACT_APP_API,
   headers: {

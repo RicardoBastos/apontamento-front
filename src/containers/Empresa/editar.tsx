@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'store/hooks';
 import Formulario from 'components/Empresa/formulario';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 interface RouteParams {
   id: string;
@@ -9,8 +9,8 @@ interface RouteParams {
 
 const Editar: React.FC = () => {
   const { id } = useParams<RouteParams>();
-  const history = useHistory();
-  const { formulario } = useStoreState((state) => state.empresa);
+  // const history = useHistory();
+  const { formulario, loading } = useStoreState((state) => state.empresa);
   const { alterarEmpresa, atualizarEmpresa, buscarPorId } = useStoreActions(
     (actions) => actions.empresa,
   );
@@ -27,7 +27,7 @@ const Editar: React.FC = () => {
 
   function handleSubmit() {
     atualizarEmpresa(formulario);
-    history.push('/empresa');
+    // history.push('/empresa');
   }
 
   return (
@@ -36,6 +36,7 @@ const Editar: React.FC = () => {
         onChange={handleChange}
         formulario={formulario}
         onSubmitEmpresa={handleSubmit}
+        loading={loading}
       />
     </>
   );

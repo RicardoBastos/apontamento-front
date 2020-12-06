@@ -1,5 +1,6 @@
 import { Action, action, thunk, Thunk } from 'easy-peasy';
 import { debounce } from 'lodash';
+
 import { IPagination, IList } from 'components/Table';
 import {
   apiListarEmpresas,
@@ -110,8 +111,10 @@ const empresa: IEmpresaModel = {
     actions.alterarBuscaPorId(usuario);
     actions.hideLoader();
   }),
-  atualizarEmpresa: thunk(async (_, payload) => {
+  atualizarEmpresa: thunk(async (actions, payload) => {
+    actions.showLoader();
     await apiAtualizarEmpresa(payload.id, payload);
+    actions.hideLoader();
   }),
   salvarEmpresa: thunk(async (actions, payload) => {
     actions.showLoader();
